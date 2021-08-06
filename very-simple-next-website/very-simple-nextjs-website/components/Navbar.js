@@ -18,7 +18,7 @@ const Navbar = () => {
     return (
         <Nav>
             <div>
-                <Link href="/">
+                <Link href="/" passHref>
                     <StyledLink>NXT</StyledLink>
                 </Link>
             </div>
