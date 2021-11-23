@@ -1,10 +1,11 @@
 <template>
   <div id="app">
     <h1>{{ mainTitle }}</h1>
+    <input type="text" placeholder="todo" v-model="newItem" />
     <div v-for="item in items" v-bind:key="item.id">
-      <p>{{ item.title }}</p>
+      <p class="item">{{ item.title }}</p>
     </div>
-    <button id="btn" @click="greet">Click me!</button>
+    <button id="btn" @click="addItem">Add Todo</button>
   </div>
 </template>
 
@@ -17,12 +18,11 @@ export default {
         { title: "Shopping", completed: false, id: 1 },
         { title: "Learn JavaScript", completed: false, id: 2 },
       ],
+      newItem: "",
     };
   },
   methods: {
-    greet() {
-      alert("Hello");
-    },
+    addItem() {},
   },
 };
 </script>
@@ -39,8 +39,7 @@ export default {
 #btn {
   margin-top: 35px;
 }
-li {
-  list-style: none;
+.item {
   color: green;
 }
 </style>
