@@ -22,7 +22,14 @@ export default {
     };
   },
   methods: {
-    addItem() {},
+    addItem() {
+      this.items.push({
+        title: this.newItem,
+        completed: false,
+        id: Math.random(),
+      });
+      this.newItem = "";
+    },
   },
 };
 </script>
