@@ -1,11 +1,27 @@
 <template>
   <div id="app">
-    <h1>{{ mainTitle }}</h1>
-    <input type="text" placeholder="todo" v-model="newItem" />
-    <div v-for="item in items" v-bind:key="item.id">
-      <p class="item">{{ item.title }}</p>
+    <div class="item">
+      <h1 id="appTitle">{{ mainTitle }}</h1>
     </div>
-    <button id="btn" @click="addItem">Add Todo</button>
+    <div class="item">
+      <input type="text" placeholder="todo" v-model="newItem" />
+      <button @click="addItem">Add Todo</button>
+    </div>
+    <div
+      class="item"
+      v-bind:class="{ completed: item.completed }"
+      v-for="item in items"
+      v-bind:key="item.id"
+    >
+      <h2>{{ item.title }}</h2>
+      <button
+        id="btnCompleted"
+        v-if="!item.completed"
+        @click="removeItem(item.id)"
+      >
+        Done
+      </button>
+    </div>
   </div>
 </template>
 
@@ -30,23 +46,38 @@ export default {
       });
       this.newItem = "";
     },
+    removeItem(id) {
+      const index = this.items.findIndex((el) => el.id === id);
+      this.items[index].completed = true;
+    },
   },
 };
 </script>
 
 <style>
-#app {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: 20px;
+#appTitle {
   color: red;
-}
-#btn {
-  margin-top: 35px;
+  padding: 20px;
 }
 .item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px;
+  padding-top: 20px;
+  border: 1px solid #cdcdcd;
+  margin: 0 auto;
+  margin-bottom: 8px;
+  padding: 10px;
   color: green;
+}
+#btnCompleted {
+  margin-left: 10px;
+}
+.completed {
+  opacity: 0.5;
+}
+.completed h2 {
+  text-decoration: line-through;
 }
 </style>
